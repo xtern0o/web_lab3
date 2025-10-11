@@ -1,0 +1,430 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #fdf0d5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+p {
+    font-family:'Times New Roman', Times, serif;
+    font-size: 16pt;
+    margin: 5px 5px;
+}
+
+.grid-container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 4fr 6fr;
+    margin: 0 20%;
+}
+
+.container {
+    display: flex;
+    margin: 1rem auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+header {
+    background-color: rgba(0, 48, 73, 0.85);
+    /* наследование */
+    color: #fdf0d5;
+    padding: 0 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-bottom: 2rem;
+}
+
+header .head-link {
+    font-family: sans-serif;
+    font-size: clamp(18px, 5vw, 24px);
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+/* селектор дочерних элементов */
+header > .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 auto;
+    padding: 0 clamp(10px, 15%, 20%);
+    flex-wrap: wrap;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.inline-pic {
+    height: clamp(50px, 5vw, 80px);
+    width: auto;
+}
+
+main {
+    flex: 1;
+    margin: 0 auto;
+    width: 100%;
+    /*background: url("img/flag-10142_256.gif");*/
+    /*background-size: cover;*/
+}
+
+main > .container {
+    margin: 0 auto;
+    padding: 0 20%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+main h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px 5px;
+    text-align: center;
+}
+
+.map-container {
+    flex: 0 0 40%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    margin: 5px 0;
+    padding: 1rem 2rem;
+    /* background-color: red; */
+}
+
+.form-container {
+    flex: 0 0 60%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    margin: 5px 0;
+    padding: 1rem 2rem;
+    /* background-color: blue; */
+}
+
+.canvas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1em 0;
+}
+
+/* селектор идентификатора */
+#map-canvas {
+    background-color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: url('../img/worldMap.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* селектор псевдокласса */
+#map-canvas:hover {
+    /*transform: scale(1.1); я такой печалик когда не считаются коорды нормально с трансформом */
+    box-shadow: 0 8px 25px rgba(120, 0, 0, 0.3);
+}
+
+footer {
+    background-color: #780000;
+    text-align: center;
+    margin-top: 1rem;
+    padding: 5px 0;
+    color: white;
+    width: 100%;
+}
+
+footer > .container {
+    align-items: center;
+    justify-content: space-around;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+footer a {
+    color: #fdf0d5;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.inline-gallery-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.control-unit-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-field-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.row-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.radio-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    justify-content: space-between;
+}
+
+/* селектор атрибутов */
+input[type="radio"] {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border: 1px solid;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    vertical-align: center;
+}
+
+input[type="radio"]:hover {
+    transform: scale(1.5);
+    transition: 0.3s ease;
+    color: rgb(0, 48, 73);
+}
+
+input[type="radio"]:checked {
+    background-color: rgb(0, 48, 73);
+    border-color: rgb(0, 48, 73);
+}
+
+.radio-container label {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+input[type="number"] {
+    background-color: #fdf0d5;
+    border: 1px solid #003049;
+    border-radius: 4px;
+    padding: 1% 2%;
+    font-size: 14pt;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    min-width: 100px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: #780000;
+    box-shadow: 0 0 8px rgba(120, 0, 0, 0.3);
+    background-color: white;
+}
+
+.error-container {
+    background-color: rgba(255, 153, 153, 0.74);
+    padding: 0.5rem 1rem;
+    border: #780000 1px solid;
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: 70px 6fr;
+    place-items: center;
+    gap: 5px;
+    margin: 0 auto;
+}
+
+.inline-error-container {
+    background-color: rgba(255, 153, 153, 0.74);
+    padding: 0.5rem 1rem;
+    border: #780000 1px solid;
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    place-items: center;
+    gap: 5px;
+}
+
+button {
+    background-color: rgb(232, 247, 255);
+    border: none;
+    text-align: center;
+    padding: 1% 3%;
+    font-size: medium;
+    cursor: pointer;
+    border: rgba(0, 48, 73, 0.7) solid 1px;
+    border-radius: 4px;
+    color: black;
+    margin: 5px 0;
+}
+
+button:hover {
+    background-color: #003049;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:active {
+    transform: scale(0.95);
+    transition: transform 0.05s ease;
+}
+
+.close-button {
+    background-color: transparent;
+    padding: 10px 10px
+}
+
+.close-button:hover {
+    background-color: #780000;
+}
+
+.form-button {
+    flex: 1;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid rgba(0, 48, 73, 0.85);
+    margin: 10px 5px;
+}
+
+table th,
+table td {
+    border: 1px solid rgba(0, 48, 73, 0.85);
+    padding: 8px 12px;
+    text-align: center;
+}
+
+table th {
+    background-color: rgba(0, 48, 73, 0.85);
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.this-is-how-i-disappear {
+    animation: fadeOut 0.3s forwards;
+}
+
+.result-page-container {
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+}
+
+.table-row {
+    color: black;
+    font-weight: normal;
+    background: transparent;
+}
+
+#error-info-p {
+    text-align: center;
+}
+
+.classic-link {
+    padding: 5px 5px;
+    color: rgb(0, 48, 73);
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    text-decoration: none;
+    text-align: center;
+    margin: 1rem auto;
+    width: 100%;
+
+    display: block;
+    box-sizing: border-box;
+}
+
+.classic-link:hover {
+    color: #780000;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.form-grid {
+    display: grid;
+    margin: 0 0;
+    grid-template-columns: auto 1fr;
+    gap: 15px;
+    padding: 5px 5px;
+}
+
+.choice-button {
+    padding: 5px 5px;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    vertical-align: center;
+    background: transparent;
+
+}
+
+input[type="checkbox"]:hover {
+    transform: scale(1.5);
+    transition: 0.3s ease;
+    color: #780000;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #780000;
+}
+
+input[type="checkbox"]:checked label {
+    color: #780000;
+    font-weight: bolder;
+}
+
+input[type="checkbox"]:checked + span {
+    color: #780000;
+}
+
+.stats-page-container {
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
