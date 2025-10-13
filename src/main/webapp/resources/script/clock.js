@@ -68,8 +68,43 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        function drawTime(ctx, radius) {
+            const now = new Date();
+            let hour = now.getHours();
+            let minute = now.getMinutes();
+            let second = now.getSeconds();
+            hour %= 12
+
+            let hourAngle = (hour * Math.PI / 6) +
+                (minute * Math.PI / (6 * 60)) +
+                (second * Math.PI / (360 * 60));
+
+            let minuteAngle = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
+
+            let secondAngle = (second * Math.PI / 30);
+
+            drawHand(ctx, hourAngle, radius * 0.5, radius * 0.07, 'black');
+            drawHand(ctx, minuteAngle, radius * 0.8, radius * 0.07, '#003049');
+            drawHand(ctx, secondAngle, radius * 0.9, radius * 0.02, '#780000');
+
+        }
+
+        function drawHand(ctx, pos, length, width, color) {
+            ctx.beginPath();
+            ctx.lineWidth = width;
+            ctx.lineCap = "round";
+            ctx.strokeStyle = color;
+
+            ctx.moveTo(0, 0);
+
+            ctx.rotate(pos);
+            ctx.lineTo(0, -length);
+            ctx.stroke();
+
+            ctx.rotate(-pos);
+        }
+
         drawClock();
+        setInterval(drawClock, 8000);
     }
-
-
 });
