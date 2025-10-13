@@ -10,13 +10,46 @@
     <ui:define name="content">
         <h1>здравствуй, jsf</h1>
         <div class="grid-container">
-            <div style="background-color: #780000;">
-                Кек
+            <div class="map-container">
+                <h2>тик так на часах)</h2>
+                <div class="canvas-container">
+                    <canvas id="clock-canvas" />
+                </div>
             </div>
-            <div style="background-color: #003049">
-                Лол
+            <div class="form-container">
+                <h2>что можно делать на этом веб-портале?</h2>
+                <div class="image-text-entry-container">
+                    <div class="image-text-entry">
+                        <h:graphicImage value="#{resource['img/clock.gif']}" />
+                        <p>Смотреть время, которое, кстати, актуально всего раз в 8 секунд</p>
+                    </div>
+                    <div class="image-text-entry">
+                        <h:graphicImage value="#{resource['img/cash-register-12248_256.gif']}" />
+                        <p>Смотреть на клевые гифки, которые автор ресурса специально подбирал так, чтобы было еще более вырвиглазно</p>
+                    </div>
+                    <div class="image-text-entry">
+                        <h:graphicImage value="#{resource['img/danger-18465_256.gif']}" />
+                        <p>ловить ошибки)</p>
+                    </div>
+                    <p style="width: 100%; text-align: center">и много чего еще...</p>
+                </div>
             </div>
         </div>
+
+        <div style="margin: 5px 20%; display: flex;">
+           <h:link value="К точкам" outcome="results" styleClass="button-big-link" />
+        </div>
+    </ui:define>
+
+    <ui:define name="scripts">
+        <h:outputScript>
+            const logo = new Image();
+            logo.src = "#{resource['img/tictac.png']}";
+
+            const audio = new Audio("#{resource['audio/TIK-TAK-NA-CHASAH.mp3']}");
+        </h:outputScript>
+
+        <h:outputScript library="script" name="clock.js" />
     </ui:define>
 
 </ui:composition>

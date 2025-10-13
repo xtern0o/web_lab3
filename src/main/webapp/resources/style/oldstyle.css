@@ -87,6 +87,13 @@ main h1 {
     text-align: center;
 }
 
+main h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 3px 5px 10px;
+    text-align: center;
+    font-size: 16pt;
+}
+
 .map-container {
     flex: 0 0 40%;
     height: 100%;
@@ -126,6 +133,17 @@ main h1 {
 /* селектор псевдокласса */
 #map-canvas:hover {
     /*transform: scale(1.1); я такой печалик когда не считаются коорды нормально с трансформом */
+    box-shadow: 0 8px 25px rgba(120, 0, 0, 0.3);
+}
+
+#clock-canvas {
+    border-radius: 50%;
+    background: transparent;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+#clock-canvas:hover {
+    transform: scale(1.1);
     box-shadow: 0 8px 25px rgba(120, 0, 0, 0.3);
 }
 
@@ -269,7 +287,6 @@ input[type="number"]:focus {
 
 button {
     background-color: rgb(232, 247, 255);
-    border: none;
     text-align: center;
     padding: 1% 3%;
     font-size: medium;
@@ -290,6 +307,8 @@ button:active {
     transform: scale(0.95);
     transition: transform 0.05s ease;
 }
+
+
 
 .close-button {
     background-color: transparent;
@@ -349,6 +368,31 @@ table th {
 
 #error-info-p {
     text-align: center;
+}
+
+.button-big-link {
+    background-color: rgb(232, 247, 255);
+    text-align: center;
+    padding: 1% 3%;
+    font-size: medium;
+    cursor: pointer;
+    border: rgba(0, 48, 73, 0.7) solid 1px;
+    border-radius: 4px;
+    color: black;
+    margin: 20px auto;
+    text-decoration: none;
+    width: 100%;
+}
+
+.button-big-link:hover {
+    background-color: #003049;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button-big-link:active {
+    transform: scale(0.9);
+    transition: transform 0.05s ease;
 }
 
 .classic-link {
@@ -427,4 +471,32 @@ input[type="checkbox"]:checked + span {
     justify-content: center;
     align-items: center;
     width: 50%;
+}
+
+.image-text-entry {
+    display: grid;
+    grid-template-columns: clamp(50px, 5vw, 80px) 1fr;
+    gap: 20px;
+    background-color: #fdf0d5;
+    border-radius: 8px;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+.image-text-entry p {
+    text-align: left;
+    margin: 0;
+    color: #32322a;
+}
+
+.image-text-entry img {
+    width: 100%;
+    height: auto;
+    justify-self: center;}
+
+.image-text-entry-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
 }

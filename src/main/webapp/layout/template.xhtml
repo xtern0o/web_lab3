@@ -19,9 +19,6 @@
     <link rel="icon" type="image/x-icon" href="#{request.contextPath}/resources/img/USA.png" />
     <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/USA.png" />
 
-    <!-- Less compiler !-->
-<!--    <h:outputScript name="https://cdn.jsdelivr.net/npm/less@4.2.0/dist/less.min.js" />-->
-
     <h:outputStylesheet library="style" name="oldstyle.css" />
 
 </h:head>
@@ -30,12 +27,15 @@
     <ui:include src="/layout/header.xhtml" />
 
     <main>
-        <ui:insert name="content" />
+        <ui:insert name="content">
+            <p>Похоже, на этой странице нет контента :(</p>
+        </ui:insert>
     </main>
 
     <ui:include src="/layout/footer.xhtml" />
 
     <ui:insert name="scripts" />
+
 </h:body>
 
 </html>
