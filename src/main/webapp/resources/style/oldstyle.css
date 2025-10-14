@@ -283,6 +283,7 @@ input[type="number"]:focus {
     grid-template-columns: 1fr 6fr 1fr;
     place-items: center;
     gap: 5px;
+    margin: 10px 0;
 }
 
 button {

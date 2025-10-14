@@ -1,8 +1,11 @@
 package org.example.utils.validators;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Singleton;
 import org.example.entity.PointEntity;
 
 // TODO: сделать логику валидации
+@ApplicationScoped
 public class PointValidator extends AbstractValidator<PointEntity> {
     public PointValidator() {
         super(point -> true);

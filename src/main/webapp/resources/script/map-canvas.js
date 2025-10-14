@@ -5,7 +5,7 @@ const height = canvas.height;
 const centerX = width / 2;
 const centerY = height / 2;
 
-const one = 50;
+const one = 30;
 
 function handleRChange(RSelectedRaw) {
     const selectedRJson = JSON.parse(RSelectedRaw);

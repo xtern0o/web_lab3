@@ -7,8 +7,10 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.utils.validators.PointValidator;
 import org.primefaces.PrimeFaces;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,8 @@ import java.util.List;
 public class InputBean implements Serializable {
     @Inject
     PointsBean pointsBean;
+    @Inject
+    PointValidator pointValidator;
 
     private Float x;
     private Float y;
@@ -33,6 +37,9 @@ public class InputBean implements Serializable {
         selectedRValues = new ArrayList<>();
     }
 
+    /**
+     * Очистка полей ввода
+     */
     public void clear() {
         x = null;
         y = null;
@@ -46,6 +53,10 @@ public class InputBean implements Serializable {
         String rJson = new Gson().toJson(selectedRValues);
 
         PrimeFaces.current().ajax().addCallbackParam("selectedRJson", rJson);
+    }
+
+    public void check() {
+
     }
 
 
