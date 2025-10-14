@@ -1,11 +1,9 @@
 package org.example.utils.validators;
 
-import org.example.entity.Point;
-
-import java.util.function.Predicate;
+import org.example.entity.PointEntity;
 
 // TODO: сделать логику валидации
-public class PointValidator extends Validator<Point> {
+public class PointValidator extends AbstractValidator<PointEntity> {
     public PointValidator() {
         super(point -> true);
     }
@@ -15,7 +13,7 @@ public class PointValidator extends Validator<Point> {
      * @param point координаты и радиус
      * @return true если внутри, false если вне площади
      */
-    public static boolean checkArea(Point point) {
+    public static boolean checkArea(PointEntity point) {
         return true;
     }
 }

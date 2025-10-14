@@ -4,7 +4,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import org.example.entity.Point;
+import org.example.entity.PointEntity;
 import org.example.utils.exceptions.ValidationError;
 
 import java.util.Collections;
@@ -17,7 +17,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Named("points")
 @ApplicationScoped
 public class PointsBean {
-    private final List<Point> pointsCache = new CopyOnWriteArrayList<>();
+    private final List<PointEntity> pointsCache = new CopyOnWriteArrayList<>();
 
     @Inject
     PointsService pointsService;
@@ -27,17 +27,17 @@ public class PointsBean {
         refresh();
     }
 
-    public List<Point> getAll() {
+    public List<PointEntity> getAll() {
         return Collections.unmodifiableList(pointsCache);
     }
 
     public synchronized void refresh() {
-        List<Point> fresh = pointsService.getAllCreatedAtDesc();
+        List<PointEntity> fresh = pointsService.getAllCreatedAtDesc();
         pointsCache.clear();
         pointsCache.addAll(fresh);
     }
 
-    public void add(Point p) throws ValidationError {
+    public void add(PointEntity p) throws ValidationError {
         pointsService.save(p);
         pointsCache.add(p);
     }

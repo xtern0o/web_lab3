@@ -1,8 +1,8 @@
 package org.example.entity;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.dto.PointDTO;
 
 import java.time.Instant;
 
@@ -13,7 +13,15 @@ import java.time.Instant;
 @NoArgsConstructor
 @ToString
 @Table(name="points", schema = "maxkarn")
-public class Point {
+public class PointEntity {
+
+    public PointEntity(PointDTO pointDTO) {
+        this.x = pointDTO.getX();
+        this.y = pointDTO.getY();
+        this.r = pointDTO.getR();
+        this.hit = pointDTO.isHit();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +33,7 @@ public class Point {
     private Float y;
 
     @Column(nullable = false)
-    private Integer r;
+    private Float r;
 
     @Column(nullable = false)
     private Boolean hit;
@@ -40,4 +48,5 @@ public class Point {
     private void onCreate() {
         if (createdAt == null) createdAt = Instant.now();
     }
+
 }

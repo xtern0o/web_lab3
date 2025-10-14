@@ -12,10 +12,10 @@ import java.util.function.Predicate;
  */
 @Getter
 @Setter
-public abstract class Validator<T> {
+public abstract class AbstractValidator<T> {
     private Predicate<T> validatePredicate;
 
-    public Validator(Predicate<T> predicate) {
+    public AbstractValidator(Predicate<T> predicate) {
         validatePredicate = predicate;
     }
 

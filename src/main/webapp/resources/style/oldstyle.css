@@ -323,21 +323,21 @@ button:active {
     flex: 1;
 }
 
-table {
+.custom-table {
     width: 100%;
     border-collapse: collapse;
     border: 1px solid rgba(0, 48, 73, 0.85);
     margin: 10px 5px;
 }
 
-table th,
-table td {
+.custom-table th,
+.custom-table td {
     border: 1px solid rgba(0, 48, 73, 0.85);
     padding: 8px 12px;
     text-align: center;
 }
 
-table th {
+.custom-table th {
     background-color: rgba(0, 48, 73, 0.85);
     color: white;
     font-family: 'Roboto', sans-serif;
@@ -421,6 +421,7 @@ table th {
     grid-template-columns: auto 1fr;
     gap: 15px;
     padding: 5px 5px;
+    align-items: center;
 }
 
 .choice-button {
@@ -499,4 +500,10 @@ input[type="checkbox"]:checked + span {
     flex-direction: column;
     gap: 20px;
     padding: 10px;
+}
+
+.form-label {
+    font-family:'Times New Roman', Times, serif;
+    font-size: 16pt;
+    margin: 5px 5px;
 }
