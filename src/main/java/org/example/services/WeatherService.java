@@ -20,19 +20,12 @@ import java.util.concurrent.ConcurrentHashMap;
 @ApplicationScoped
 @NoArgsConstructor
 public class WeatherService {
-    Dotenv dotenv;
-
     private final HttpClient httpClient = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
             .connectTimeout(Duration.ofSeconds(5))
             .build();
 
     private final String weatherApiTemplateURI = "http://api.weatherapi.com/v1/current.json?key=%s&q=%s&aqi=no";
-
-    @PostConstruct
-    private void init() {
-        dotenv = Dotenv.load();
-    }
 
     /**
      * Получение температуры в городе с помощью api.weatherapi.com
@@ -41,12 +34,18 @@ public class WeatherService {
      * @throws APIException Исключение которое возникает в случае ошибки запроса в апи
      */
     public Float getTemperatureByIp(String ip) throws APIException {
+        System.out.println("DEBUG: IP = " + ip);
+        String apiKey = System.getenv("WEATHER_API_KEY");
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            throw new APIException("WEATHER_API_KEY environment variable is not set.");
+        }
+
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create(String.format(weatherApiTemplateURI, dotenv.get("WEATHER_API_KEY"), ip)))
+                .uri(URI.create(String.format(weatherApiTemplateURI, apiKey, ip)))
                 .header("Accept", "application/json")
                 .build();
-        System.out.println("DEBUG: IP = " + ip);
+
         try {
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() != 200) {
