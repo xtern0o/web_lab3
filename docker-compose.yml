@@ -21,6 +21,8 @@ services:
         ADMIN_PASSWORD: ${ADMIN_PASSWORD}
     container_name: web_lab3_app
     restart: always
+    environment:
+      WEATHER_API_KEY: ${WEATHER_API_KEY}
     ports:
       - "55080:8080"
       - "55990:9990"
