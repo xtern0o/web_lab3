@@ -1,8 +1,6 @@
 package org.example.services;
 
 import com.google.gson.Gson;
-import io.github.cdimascio.dotenv.Dotenv;
-import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.NoArgsConstructor;
 import org.example.utils.exceptions.APIException;
@@ -13,9 +11,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @ApplicationScoped
 @NoArgsConstructor
