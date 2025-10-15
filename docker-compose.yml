@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.3'
 
 services:
   db:
@@ -23,7 +23,7 @@ services:
     restart: always
     ports:
       - "55080:8080"
-      - "55990:9090"
+      - "55990:9990"
     depends_on:
       - db
 
