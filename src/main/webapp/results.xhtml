@@ -25,6 +25,16 @@
             }
         </style>
 
+        <div class="navbar-container">
+            <h:link value="Часы" outcome="index" styleClass="btn" />
+            <div class="navbar-item">
+                <div class="inline-gallery-container">
+                    <h:graphicImage value="#{resource['img/gradus.gif']}" width="40" />
+                    <p id="temp-p">#{inputBean.temperature == null ? "нет данных" : inputBean.temperature} °C</p>
+                </div>
+            </div>
+
+        </div>
         <div class="grid-container">
             <div class="map-container">
                 <h1>Map</h1>
@@ -125,7 +135,7 @@
                             <h:outputText value="#{point.r}" />
                         </p:column>
                         <p:column headerText="hit">
-                            <h:outputText value="#{point.hit}" />
+                            <h:outputText value='#{point.hit ? "ПОПАЛ" : "ПРОМАЗАЛ"}' styleClass='#{point.hit ? "good" : "bad"}' />
                         </p:column>
                         <p:column headerText="temp">
                             <h:outputText value="#{point.temperature}" />
