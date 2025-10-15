@@ -11,7 +11,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Table(name="points", schema = "maxkarn")
+@Table(name="points")
 public class PointEntity {
 
     public PointEntity(PointDTO pointDTO) {
