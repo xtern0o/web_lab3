@@ -83,6 +83,7 @@ public class InputBean implements Serializable {
         if (selectedRValues.isEmpty()) throw new ValidatorException(new FacesMessage("Ошибка валидации", "Валидация провалилась!"));
 
         refreshTemperature();
+        PrimeFaces.current().ajax().addCallbackParam("refreshedTemp", temperature);
 
         List<PointDTO> pointDTOs = new CopyOnWriteArrayList<>();
         selectedRValues.forEach((r) -> pointDTOs.add(new PointDTO(x, y, Float.parseFloat(r), this.temperature)));
@@ -97,7 +98,8 @@ public class InputBean implements Serializable {
         try {
             pointsBean.addAll(pointEntities);
         } catch (ValidationError validationError) {
-            throw new ValidatorException(new FacesMessage("Ошибка валидации", validationError.getMessage()));
+            FacesMessage facesMessage = new FacesMessage("Ошибка валидации", validationError.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
         } finally {
             String pointsJsonRaw = new Gson().toJson(pointDTOs);
             PrimeFaces.current().ajax().addCallbackParam("pointsJsonRaw", pointsJsonRaw);
