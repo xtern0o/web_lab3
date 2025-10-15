@@ -6,8 +6,7 @@ import org.example.dto.PointDTO;
 
 import java.time.Instant;
 
-@Getter
-@Setter
+@Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,6 +19,7 @@ public class PointEntity {
         this.y = pointDTO.getY();
         this.r = pointDTO.getR();
         this.hit = pointDTO.isHit();
+        this.temperature = pointDTO.getTemperature();
     }
 
     @Id

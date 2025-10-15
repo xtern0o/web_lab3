@@ -1,6 +1,7 @@
 package org.example.managers;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -9,6 +10,7 @@ import jakarta.transaction.Transactional;
 import org.example.entity.PointEntity;
 import org.example.utils.exceptions.ValidationError;
 import org.example.utils.jpa.PointsPersistence;
+import org.example.utils.validators.PointValidator;
 
 import java.util.List;
 
@@ -17,8 +19,9 @@ import java.util.List;
  * Сервис для взаимодействия с БД
  */
 @ApplicationScoped
-@Named("pointsService")
-public class PointsService implements PointsPersistence {
+public class PointsRepository implements PointsPersistence {
+    @Inject
+    PointValidator pointValidator;
 
     @PersistenceContext
     private EntityManager em;
@@ -26,6 +29,7 @@ public class PointsService implements PointsPersistence {
     @Override
     @Transactional
     public void save(PointEntity p) throws ValidationError {
+        if (!pointValidator.validate(p)) throw new ValidationError(p);
         if (p.getId() == null) em.persist(p);
         else em.merge(p);
     }

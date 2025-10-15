@@ -93,18 +93,55 @@
                                     value="Проверить"
                                     actionListener="#{inputBean.check}"
                                     process="@form"
-                                    update="control-form"
+                                    update="control-form response-table growl"
                                     styleClass="ui-button-success form-button"
-                                    onclick="if (!validateForm()) return false;"
-                            />
+                                    onclick="if (!validateForm()) return false;" />
                         </div>
                     </h:form>
+
+                    <p:growl id="growl" showDetail="true" />
+
+                    <div id="table-h" class="inline-gallery-container" style="margin-top: 20px;">
+                        <h:graphicImage value="#{resource['img/radioactive-19946_256.gif']}" width="50" />
+                        <h1>Results</h1>
+                        <h:graphicImage value="#{resource['img/radioactive-19946_256.gif']}" width="50" />
+                    </div>
+
+                    <p:dataTable
+                            id="response-table"
+                            value="#{inputBean.reversedPoints}"
+                            var="point"
+                            styleClass="custom-table"
+                            responsiveLayout="scroll"
+                            scrollable="true"
+                            scrollHeight="300px">
+                        <p:column headerText="x">
+                            <h:outputText value="#{point.x}" />
+                        </p:column>
+                        <p:column headerText="y">
+                            <h:outputText value="#{point.y}" />
+                        </p:column>
+                        <p:column headerText="r">
+                            <h:outputText value="#{point.r}" />
+                        </p:column>
+                        <p:column headerText="hit">
+                            <h:outputText value="#{point.hit}" />
+                        </p:column>
+                        <p:column headerText="temp">
+                            <h:outputText value="#{point.temperature}" />
+                        </p:column>
+                    </p:dataTable>
+
                 </div>
             </div>
         </div>
     </ui:define>
 
     <ui:define name="scripts">
+        <h:outputScript>
+            const errorImageSrc = '#{resource['img/danger-18465_256.gif']}'
+        </h:outputScript>
+
         <h:outputScript library="script" name="map-canvas.js" />
         <h:outputScript library="script" name="form.js" />
 

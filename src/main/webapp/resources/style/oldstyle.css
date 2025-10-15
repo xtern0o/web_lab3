@@ -325,24 +325,28 @@ button:active {
 }
 
 .custom-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid rgba(0, 48, 73, 0.85);
-    margin: 10px 5px;
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border: 1px solid rgba(0, 48, 73, 0.85) !important;
+    margin: 10px 5px !important;
 }
 
 .custom-table th,
 .custom-table td {
-    border: 1px solid rgba(0, 48, 73, 0.85);
+    border: 1px solid rgba(0, 48, 73, 0.85) !important;
     padding: 8px 12px;
-    text-align: center;
+    text-align: center !important;
 }
 
 .custom-table th {
-    background-color: rgba(0, 48, 73, 0.85);
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
+    padding: 2px 4px;
+}
+
+.custom-table th {
+    background-color: rgba(0, 48, 73, 0.85) !important;
+    color: white !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: bold !important;
 }
 
 @keyframes fadeOut {

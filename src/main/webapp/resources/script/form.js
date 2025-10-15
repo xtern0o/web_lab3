@@ -1,4 +1,4 @@
-const controlUnitDiv = document.querySelector('#control-unit-div');
+const controlForm = document.querySelector('#control-form');
 var errorCount = 0;
 
 function validateForm() {
@@ -33,7 +33,7 @@ function showError(summary, text) {
     errorDiv.setAttribute("id", "error-div-" + ++errorCount);
     errorDiv.setAttribute("class", "inline-error-container");
     errorDiv.innerHTML = `
-        <img src="img/danger-18465_256.gif" width="50">
+        <img src=${errorImageSrc} width="50">
         <div>
             <h2 style="text-align: center; color: #780000">${summary}</h2>
             <p id="error-info-p">${text}</p>
@@ -41,7 +41,7 @@ function showError(summary, text) {
         <button class="close-button" id="close-error-button-${errorCount}">x</button>
     `;
 
-    controlUnitDiv.after(errorDiv);
+    controlForm.after(errorDiv);
     document.querySelector("#close-error-button-" + errorCount).addEventListener("click", () => {
         const thisDiv = document.querySelector("#error-div-" + errorCount);
         thisDiv.remove();

@@ -41,6 +41,13 @@ dependencies {
     // GSON
     implementation 'com.google.code.gson:gson:2.7'
 
+    // Dotenv
+    implementation 'io.github.cdimascio:dotenv-java:3.0.0'
+
+    // Servler API (используется для вычленения IP)
+    providedCompile 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+
+
 }
 
 test {
