@@ -57,12 +57,14 @@ public class WeatherService {
             }
 
             Gson gson = new Gson();
-            HashMap<String, Object> mappedJson = (HashMap<String, Object>) gson.fromJson(response.body(), HashMap.class);
-            Float temp = (Float) ((HashMap<String, Object>) mappedJson.get("current")).get("temp_c");
+            Map<String, Object> mappedJson = gson.fromJson(response.body(), Map.class);
+            Map<String, Object> current = (Map<String, Object>) mappedJson.get("current");
+            if (current == null) throw new APIException("'current' object is null in the API response");
 
-            if (temp == null) throw new APIException("temp is null");
+            Object tempObj = current.get("temp_c");
+            if (tempObj == null) throw new APIException("'temp_c' is null in the API response");
 
-            return temp;
+            return ((Number) tempObj).floatValue();
 
         } catch (IOException | InterruptedException exception) {
             throw new APIException(exception.getMessage());
