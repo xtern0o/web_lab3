@@ -392,6 +392,7 @@ button:active {
     border: 1px solid rgba(0, 48, 73, 0.85) !important;
     padding: 8px 12px;
     text-align: center !important;
+    background-color: #fdf0d5;
 }
 
 .custom-table th {

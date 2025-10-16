@@ -30,7 +30,7 @@ public class WeatherService {
      * @throws APIException Исключение которое возникает в случае ошибки запроса в апи
      */
     public Float getTemperatureByIp(String ip) throws APIException {
-        System.out.println("DEBUG: IP = " + ip);
+//        System.out.println("DEBUG: IP = " + ip);
         String apiKey = System.getenv("WEATHER_API_KEY");
         if (apiKey == null || apiKey.trim().isEmpty()) {
             throw new APIException("WEATHER_API_KEY environment variable is not set.");

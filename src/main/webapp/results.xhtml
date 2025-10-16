@@ -103,9 +103,11 @@
                                     value="Проверить"
                                     actionListener="#{inputBean.check}"
                                     process="@form"
-                                    update="control-form response-table growl"
+                                    update="control-form response-table growl all-points-json max-r-value"
                                     styleClass="ui-button-success form-button"
-                                    onclick="if (!validateForm()) return false;" />
+                                    onclick="if (!validateForm()) return false;"
+                                    oncomplete="refreshCanvas();" />
+
                         </div>
                     </h:form>
 
@@ -145,6 +147,20 @@
                 </div>
             </div>
         </div>
+
+        <h:inputHidden id="all-points-json" value="#{inputBean.allPointsAsJson}" />
+        <h:inputHidden id="max-r-value" value="#{inputBean.maxR}" />
+
+        <p:remoteCommand name="addFacesMessage"
+                         actionListener="#{inputBean.addFacesMessage}"
+                         update="growl"
+                         process="@this"/>
+        <p:remoteCommand name="addPointViaCanvas"
+                         actionListener="#{inputBean.addPointViaCanvas}"
+                         update="control-form response-table growl all-points-json max-r-value"
+                         oncomplete="refreshCanvas()"
+                         process="@this" />
+
     </ui:define>
 
     <ui:define name="scripts">

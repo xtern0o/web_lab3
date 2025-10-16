@@ -47,6 +47,8 @@ public class InputBean implements Serializable {
     private List<String> selectedRValues;
     private Float temperature;
 
+    private Float maxR;
+
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     private String ip;
@@ -71,6 +73,9 @@ public class InputBean implements Serializable {
      * Метод, который вызывает ajax-событие изменения радиуса
      */
     public void onRChange() {
+        List<Float> floatSelectedR = selectedRValues.stream().map(Float::parseFloat).toList();
+        this.maxR = floatSelectedR.stream().max(Float::compare).orElse(null);
+
         String rJson = new Gson().toJson(selectedRValues);
 
         PrimeFaces.current().ajax().addCallbackParam("selectedRJson", rJson);
@@ -87,6 +92,14 @@ public class InputBean implements Serializable {
 
         List<PointDTO> pointDTOs = new CopyOnWriteArrayList<>();
         selectedRValues.forEach((r) -> pointDTOs.add(new PointDTO(x, y, Float.parseFloat(r), this.temperature)));
+        addPoints(pointDTOs);
+    }
+
+    /**
+     * Инкапсулированный метод для добавления точек через контроллер
+     * @param pointDTOs массив из дто
+     */
+    private void addPoints(List<PointDTO> pointDTOs) {
         for (int i = 0; i < pointDTOs.size(); i++) {
             PointDTO currentPointDTO = pointDTOs.get(i);
             currentPointDTO.setHit(pointValidator.checkArea(currentPointDTO));
@@ -104,6 +117,21 @@ public class InputBean implements Serializable {
             String pointsJsonRaw = new Gson().toJson(pointDTOs);
             PrimeFaces.current().ajax().addCallbackParam("pointsJsonRaw", pointsJsonRaw);
         }
+    }
+
+    public void addPointViaCanvas() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        String x = facesContext.getExternalContext().getRequestParameterMap().get("x");
+        String y = facesContext.getExternalContext().getRequestParameterMap().get("y");
+        List<String> rList = (List<String>) new Gson().fromJson(facesContext.getExternalContext().getRequestParameterMap().get("rList"), List.class);
+
+        List<PointDTO> pointDTOs = new CopyOnWriteArrayList<>();
+        rList.forEach(
+                (r) -> pointDTOs.add(
+                        new PointDTO(Float.parseFloat(x), Float.parseFloat(y), Float.parseFloat(r), this.temperature)
+                )
+        );
+        addPoints(pointDTOs);
     }
 
     /**
@@ -124,6 +152,14 @@ public class InputBean implements Serializable {
         List<PointDTO> reversedList = new ArrayList<>(getAllPoints());
         Collections.reverse(reversedList);
         return reversedList;
+    }
+
+    /**
+     * Получить все точки в виде Json
+     * @return json-массив с точками
+     */
+    public String getAllPointsAsJson() {
+        return new Gson().toJson(getAllPoints());
     }
 
     /**
@@ -157,6 +193,26 @@ public class InputBean implements Serializable {
         }
 
         this.ip = ipAdress;
+    }
+
+    /**
+     * Функция-связка для вывода primeFaces тоастов из js
+     */
+    public void addFacesMessage() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        String summary = context.getExternalContext().getRequestParameterMap().get("summary");
+        String detail = context.getExternalContext().getRequestParameterMap().get("detail");
+        String severityParam = context.getExternalContext().getRequestParameterMap().get("severity");
+
+        FacesMessage.Severity severity = switch (severityParam) {
+            case "info" -> FacesMessage.SEVERITY_INFO;
+            case "warn" -> FacesMessage.SEVERITY_WARN;
+            case "error" -> FacesMessage.SEVERITY_ERROR;
+            case "fatal" -> FacesMessage.SEVERITY_FATAL;
+            default -> FacesMessage.SEVERITY_INFO;
+        };
+
+        context.addMessage(null, new FacesMessage(severity, summary, detail));
     }
 
 }
