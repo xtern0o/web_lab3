@@ -7,6 +7,6 @@
 ```bash
 docker-compose up -d
 ```
-- `http:localhost:55090`: Configuration > Subsystems > Datasources & Drivers > Datasources (+) > Add Datasource
+- `http://localhost:55990`: Configuration > Subsystems > Datasources & Drivers > Datasources (+) > Add Datasource
 - там найти бд. URL для соединения: поменять `localhost` на `db`, `<DATABASE_NAME>` поменять на `pointsdb`
 - запустить .war с приложением
