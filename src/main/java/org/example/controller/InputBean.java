@@ -6,6 +6,7 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.validator.ValidatorException;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 @Data
 @Named("inputBean")
-@SessionScoped
+@ViewScoped
 public class InputBean implements Serializable {
     @Inject
     PointsBean pointsBean;
